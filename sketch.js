@@ -12,7 +12,12 @@ function draw() {
   background('#ffc2d1'); // 每次繪製時重設背景
   let x = (width - capture.width) / 2; // 計算影像的水平居中位置
   let y = (height - capture.height) / 2; // 計算影像的垂直居中位置
-  image(capture, x, y, capture.width, capture.height); // 繪製攝影機影像
+
+  push(); // 儲存當前繪圖設定
+  translate(x + capture.width, y); // 移動畫布到影像位置，並將原點移到右側
+  scale(-1, 1); // 水平翻轉影像
+  image(capture, 0, 0, capture.width, capture.height); // 繪製攝影機影像
+  pop(); // 恢復繪圖設定
 }
 
 function windowResized() {
